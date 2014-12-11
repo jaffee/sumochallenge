@@ -26,3 +26,11 @@ block content
           each option in question.Options
             li
               = option.optionString
+
+  p Responses:
+  ul
+    each response in responses
+      li
+        = response.Question.questionString
+        &nbsp;
+        = response.Option.optionString
