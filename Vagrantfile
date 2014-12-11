@@ -10,10 +10,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "hashicorp/precise32"
+  config.vm.box = "hashicorp/precise64"
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.provision :shell, path: "runapp.sh", run: "always"
+
+
+  # Required for NFS to work, pick any local IP
+  config.vm.network :private_network, ip: '192.168.50.50'
+  # Use NFS for shared folders for better performance
+  config.vm.synced_folder '.', '/vagrant', nfs: true
+
+
   config.vm.network :forwarded_port, host: 3001, guest: 3000
+
+  # Use a bit more than a single cpu and like 2 megs of memory
+  cpus = 4
+  mem = 1536
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

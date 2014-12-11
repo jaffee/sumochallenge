@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  p Add a question to the survey!
+  form(action="/questions/create", method="post")
+    p Question:
+    textarea(name="question_text", rows=10, cols=50)
+    p Option 1:
+    input(type="text", name="option_one", size=50)
+    p Option 2:
+    input(type="text", name="option_two", size=50)
+    p Option 3:
+    input(type="text", name="option_three", size=50)
+    p Option 4:
+    input(type="text", name="option_four", size=50)
+    div
+    input(type="submit")
+
+
+  p Questions:
+  ul
+    each question in questions
+      li
+        = question.questionString
+        ul
+          each option in question.Options
+            li
+              = option.optionString

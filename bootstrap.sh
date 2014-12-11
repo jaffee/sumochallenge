@@ -9,12 +9,16 @@ apt-get update
 export DEBIAN_FRONTEND=noninteractive
 apt-get -q -y install mysql-server
 
+mysql -u root -e 'create database sumodb_dev;'
+
 # nodejs
 apt-get install -y python-software-properties python g++ make
 add-apt-repository -y ppa:chris-lea/node.js
 apt-get update
 apt-get install -y nodejs
 
+# helpful for dev
+npm install -g nodemon
 
 # install app
 cd /vagrant

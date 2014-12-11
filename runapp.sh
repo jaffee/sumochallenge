@@ -2,4 +2,4 @@
 
 # run the app
 cd /vagrant
-./bin/www > serverlog.txt 2>&1 &
+nodemon -L ./bin/www > serverlog.txt 2>&1 &
