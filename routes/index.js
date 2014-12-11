@@ -10,7 +10,8 @@ function getRandomInt(min, max) {
 /* GET home page. */
 router.get('/', function(req, res) {
 	models.Question.max('id').success(function (max){
-		models.Question.find({id: getRandomInt(1, max+1), include: [models.Option]}).then(function(question){
+		var rand_id = getRandomInt(1, max+1);
+		models.Question.find({where: {id: rand_id}, include: [models.Option]}).then(function(question){
 			res.render('index', {
 				title: 'Sumo Challenge',
 				question: question});
@@ -36,5 +37,4 @@ router.get('/admin', function(req, res) {
 	});
 });
 
-//
 module.exports = router;

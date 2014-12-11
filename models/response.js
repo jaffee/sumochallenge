@@ -4,12 +4,11 @@ module.exports = function(sequelize, DataTypes) {
 	var Response = sequelize.define("Response", null, {
 		classMethods: {
 			associate: function(models) {
-				Response.hasOne(models.Question);
-				Response.hasOne(models.Option);
+				Response.belongsTo(models.Question);
+				Response.belongsTo(models.Option);
 			}
 		}
 	});
-	//
 
 	return Response;
 };
