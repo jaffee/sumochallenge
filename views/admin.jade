@@ -30,7 +30,9 @@ block content
   p Responses:
   ul
     each response in responses
-      li
-        = response.Question.questionString
-        &nbsp;
-        = response.Option.optionString
+      if response && response.Question && response.Option
+        li
+          = response.Question.questionString
+          &nbsp;
+          = response.Option.optionString
+//

@@ -4,11 +4,14 @@ block content
   h1= title
   p Welcome to #{title}
   a(href='/admin') Admin Page
-  p= question.questionString
-  form(action="/responses/create/" + question.id, method="post")
-    each option in question.Options
-      span
-        input(type="radio", name=question.id, value=option.id)
-        span= option.optionString
-      br
-    input(type="submit")
+  if question
+    p= question.questionString
+    form(action="/responses/create/" + question.id, method="post")
+      each option in question.Options
+        span
+          input(type="radio", name=question.id, value=option.id)
+          span= option.optionString
+        br
+      input(type="submit")
+  else
+    p You have answered everything!

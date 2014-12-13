@@ -1,4 +1,5 @@
 var express = require('express');
+var sequelize = require('sequelize');
 var router = express.Router();
 var models = require('../models');
 
@@ -9,15 +10,33 @@ function getRandomInt(min, max) {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	models.Question.max('id').success(function (max){
-		var rand_id = getRandomInt(1, max+1);
-		models.Question.find({where: {id: rand_id}, include: [models.Option]}).then(function(question){
+	if (!("seenQuestions" in  res.cookie)) {
+		res.cookie.seenQuestions = [];
+		res.cookie.maxAge = 1000000;
+	}
+	var seenQuestions = res.cookie["seenQuestions"];
+
+	// find all questions that are not in seenQuestions
+	models.Question.findAll({
+		// couldn't find the way to do NOT IN list, so... this hack
+		where: sequelize.and.apply(this, seenQuestions.map(function (id){
+			return {id: {ne: id}};
+		})),
+		include: [models.Option]
+	}).then(function(questions){
+		if(questions.length != 0){
+			// pick one at random
+			var question = questions[getRandomInt(0, questions.length)];
+			res.cookie.seenQuestions.push(question.id);
 			res.render('index', {
 				title: 'Sumo Challenge',
-				question: question});
-		});
+				question: question
+			});
+		}
+		else {
+			res.render('index', {title: 'Sumo Challenge'});
+		}
 	});
-
 });
 
 
