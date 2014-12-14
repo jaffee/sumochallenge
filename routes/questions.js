@@ -6,13 +6,15 @@ router.post('/create', function(req, res) {
 	models.Question.create({
 		questionString: req.param('question_text')
 	}).then(function(question) {
-		// hack to not support arbitrary no. of options yet
-		var names = ["option_one", "option_two", "option_three", "option_four"];
 		var optStrings = [];
-		for(var i = 0; i < names.length; i++){
-			var optionString = req.param(names[i]);
-			if(optionString){
-				optStrings.push(optionString);
+		var form_keys = Object.keys(req.body);
+		for(var i = 0; i < form_keys.length; i++){
+			// for each key that starts with "option"
+			if (form_keys[i].lastIndexOf("option", 0) === 0){
+				var optionString = req.body[form_keys[i]];
+				if(optionString){
+					optStrings.push(optionString);
+				}
 			}
 		}
 		for(i = 0; i < optStrings.length; i++){
