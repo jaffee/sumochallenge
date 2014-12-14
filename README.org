@@ -1,1 +1,16 @@
-appsumo challenge
+Mini survey tool - an admin can enter multiple choice questions, which
+are then displayed to guests randomly with no repeats.
+
+* prerequisites
+** Vagrant
+Install virtualbox and Vagrant for the easiest path to installation.
+
+
+* Installation steps
+** With Vagrant
+Clone the repository, enter the directory, and type =vagrant up= to
+create and start the application inside a virtual machine.
+
+Then go to =localhost:3001= in your browser. Port forwarding is taken
+care of by vagrant, so you can access the running instance of the
+application in the virtual machine from your host's browser.
