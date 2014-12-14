@@ -4,34 +4,38 @@ block head
   link(rel='stylesheet', href='/stylesheets/admin.css')
 
 block content
-  div id="content_div"
-    p Add a question to the survey!
+  div(id="content_div")
+    h2 Add a question to the survey!
     form(action="/questions/create", method="post")
-      p Question:
-      textarea(name="question_text", rows=10, cols=50)
-      p Add multiple choice options:
+      h4 Question:
+      textarea(name="question_text", rows=4, cols=50)
+      h4 Add multiple choice options:
       div(class="optionField")
         input(type="text", name="option_one", size=50)
         button(id="addoption", form="", onclick="updateOptionFields()") +
-      div
-      input(type="submit")
+      div(class="submitHolder")
+        input(type="submit")
     script(type="text/javascript", src="/javascripts/options.js")
 
-    p Questions:
-    ul
+    h2 Questions
       each question in questions
-        li
-          = question.questionString
-          ul
+        div(class='question')
+          if question.questionString
+            = question.questionString
+          else
+            [Empty Question]
+          if question.Options.length
             each option in question.Options
-              li
+              div(class='option')
                 = option.optionString
+          else
+            div(class='option')
+              [No Options]
 
-    p Responses:
-    ul
+    h2 Responses
       each response in responses
         if response && response.Question && response.Option
-          li
+          div(class="question")
             = response.Question.questionString
-            &nbsp;
-            = response.Option.optionString
+            div(class="option")
+              = response.Option.optionString
