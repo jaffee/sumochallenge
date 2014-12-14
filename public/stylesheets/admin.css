@@ -1,0 +1,44 @@
+#content_div {
+	min-width: 200px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+h2 {
+	text-align: center;
+}
+
+
+h4 {
+	text-align: center;
+}
+
+textarea {
+	width: 50%;
+	margin-left: 25%;
+}
+
+
+.optionField > input {
+	width: 50%;
+	margin-left: 25%;
+}
+
+.submitHolder {
+	text-align: center;
+}
+
+
+.question {
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 10px;
+	font-size: 14px;
+	text-align: left;
+}
+
+.option {
+	font-size: 12px;
+	font-weight: normal;
+	text-align: left;
+}
