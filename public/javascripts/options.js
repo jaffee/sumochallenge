@@ -39,7 +39,11 @@ var updateOptionFields = function(e){
 	lastOption = lastOption[lastOption.length - 1];
 	if(lastOption.value){
 		$("#addoption").remove();
-		getOption().insertAfter($(lastOption).parent());
+		var newOpt = getOption();
+		newOpt.insertAfter($(lastOption).parent());
+		lastOption = $(".optionField > input");
+		lastOption = lastOption[lastOption.length - 1];
+		lastOption.focus();
 
 		$(".optionField").unbind("change");
 		$(".optionField").change(updateOptionFields);
