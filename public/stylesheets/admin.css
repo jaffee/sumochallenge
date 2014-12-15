@@ -42,3 +42,18 @@ textarea {
 	font-weight: normal;
 	text-align: left;
 }
+
+.result_option {
+	background-color: #AAFFAA;
+	text-align: left;
+	padding-left: 4px;
+	white-space: nowrap;
+}
+
+
+.result_option:nth-child(even) {
+	background-color: #AAFFAA;
+}
+.result_option:nth-child(odd) {
+	background-color: #FFAAAA;
+}

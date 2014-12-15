@@ -40,6 +40,56 @@ router.get('/', function(req, res) {
 });
 
 
+
+/*
+ Results object:
+{ questionID: {
+    questionString: string,
+    options: question.Options, (with num_responses added to each option)
+    total: num
+  }
+}
+*/
+var construct_results = function(questions, responses){
+	var results = {};
+	var question;
+	for(var i = 0; i < questions.length; i++){
+		question = questions[i];
+		// initialize num_responses to each option
+		for(var j = 0; j < question.Options.length; j++){
+			question.Options[j]["num_responses"] = 0;
+		}
+		var q_obj = {questionString: question.questionString,
+					 options: question.Options,
+					 total: 0};
+		results[question.id] = q_obj;
+	}
+	var response;
+	for(i = 0; i < responses.length; i++){
+		response = responses[i];
+		if (response.Question && response.Option){
+			add_result_to_options(results[response.Question.id]["options"], response.Option);
+			results[response.Question.id]["total"] += 1;
+		}
+	}
+
+	return results;
+};
+
+var add_result_to_options = function(options, option){
+	var opt;
+	for(var i = 0; i < options.length; i ++){
+		opt = options[i];
+		if (opt.id == option.id){
+			opt["num_responses"] += 1;
+			break;
+		}
+	}
+};
+
+
+
+
 router.get('/admin', function(req, res) {
 	models.Question.findAll({
 		include: [ models.Option ]
@@ -47,10 +97,10 @@ router.get('/admin', function(req, res) {
 		models.Response.findAll({
 			include: [models.Option, models.Question]
 		}).then(function (responses){
+			var results = construct_results(questions, responses);
 			res.render('admin', {
 				title: 'Sumo Challenge',
-				questions: questions,
-				responses: responses
+				results: results
 			});
 		});
 	});

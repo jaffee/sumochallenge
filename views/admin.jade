@@ -17,25 +17,20 @@ block content
         input(type="submit")
     script(type="text/javascript", src="/javascripts/options.js")
 
-    h2 Questions
-      each question in questions
-        div(class='question')
-          if question.questionString
-            = question.questionString
-          else
-            [Empty Question]
-          if question.Options.length
-            each option in question.Options
-              div(class='option')
-                = option.optionString
-          else
-            div(class='option')
-              [No Options]
+    h2 Results
+    div
+      each result in Object.keys(results)
+        p
+          span
+            =results[result].questionString
+            &nbsp
+            |(Total Number of responses:
+            =results[result].total
+            |)
 
-    h2 Responses
-      each response in responses
-        if response && response.Question && response.Option
-          div(class="question")
-            = response.Question.questionString
-            div(class="option")
-              = response.Option.optionString
+        if results[result].options
+          each opt in results[result].options
+            div(class="result_option" style="width:"+ opt.num_responses*100/results[result].total + "%;")
+              =opt.num_responses
+              &nbsp
+              =opt.optionString

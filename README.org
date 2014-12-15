@@ -1,9 +1,9 @@
 Mini survey tool - an admin can enter multiple choice questions, which
 are then displayed to guests randomly with no repeats.
 
-* prerequisites
+* Prerequisites
 ** Vagrant
-Install virtualbox and Vagrant for the easiest path to installation.
+Install [[https://www.virtualbox.org/][Virtualbox]] and [[https://www.vagrantup.com/][Vagrant]] for the easiest path to installation.
 
 
 * Installation steps
