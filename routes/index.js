@@ -2,6 +2,11 @@ var express = require('express');
 var sequelize = require('sequelize');
 var router = express.Router();
 var models = require('../models');
+var passport = require('passport');
+
+require('../config/passport')(passport);
+
+
 
 
 function getRandomInt(min, max) {
@@ -87,10 +92,7 @@ var add_result_to_options = function(options, option){
 	}
 };
 
-
-
-
-router.get('/admin', function(req, res) {
+router.get('/admin', isLoggedIn, function(req, res) {
 	models.Question.findAll({
 		include: [ models.Option ]
 	}).then(function(questions) {
@@ -105,5 +107,22 @@ router.get('/admin', function(req, res) {
 		});
 	});
 });
+
+router.get('/login', function(req, res) {
+	res.render('login');
+});
+
+router.post('/login',
+			passport.authenticate('local', { successRedirect: '/admin',
+											 failureRedirect: '/login'
+										   }));
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/login');
+};
 
 module.exports = router;

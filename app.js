@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var questions = require('./routes/questions');
 var responses = require('./routes/responses');
+var passport = require('passport');
 
 var app = express();
 
@@ -25,6 +26,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// required for passport
+app.use(session({ secret: 'blahlaskdjf' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 
 app.use('/', routes);
 app.use('/users', users);
@@ -61,6 +68,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
 
 
 module.exports = app;
