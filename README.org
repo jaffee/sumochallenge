@@ -7,6 +7,9 @@ Install [[https://www.virtualbox.org/][Virtualbox]] and [[https://www.vagrantup.
 
 
 * Installation steps
+I highly recommend trying out Vagrant to do the install - it is a very
+nice tool.
+
 ** With Vagrant
 Clone the repository, enter the directory, and type =vagrant up= to
 create and start the application inside a virtual machine.
@@ -14,3 +17,28 @@ create and start the application inside a virtual machine.
 Then go to =localhost:3001= in your browser. Port forwarding is taken
 care of by vagrant, so you can access the running instance of the
 application in the virtual machine from your host's browser.
+
+
+** Without Vagrant
+You'll need [[http://nodejs.org/][Node]] and it's package manager =npm= installed. Then simply
+clone the repository, =cd= into it, and run =npm install=.
+
+You'll also need to install and start a [[http://www.mysql.com/][MySQL]] server if you don't have
+one already. If you're on a linux distribution, your package manager
+probably makes this easy. For Debian based systems:
+
+#+begin_src bash
+sudo apt-get install mysql-server
+#+end_src
+
+Now create the SQL database for the application:
+#+begin_src bash
+mysql -u root 'create database sumodb_dev'
+#+end_src
+Depending on how you installed SQL, you may need to specify a user
+other than =root=, and possibly use the =-p= option to enter a
+password.
+
+To start the application, =node bin/www=.
+
+Then navigate to localhost:3000 in your browser.
