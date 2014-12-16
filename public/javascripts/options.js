@@ -21,7 +21,7 @@ var getid = (function() {
 
 
 var getOption = function(){
-	return $("<div  class='optionField'><input name='option_" + getid() + "' type='text' size=50/><button id='addoption'>+</button> </div>");
+	return $("<div  class='optionField'><input name='option_" + getid() + "' type='text' size=50/><button id='addoption' type='button', onclick='updateOptionFields()'>+</button> </div>");
 };
 
 

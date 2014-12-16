@@ -1,51 +1,66 @@
 #content_div {
 	min-width: 200px;
-	max-width: 1000px;
+	max-width: 700px;
+	width: 90%;
 	margin: 0 auto;
 }
 
-h2 {
-	text-align: center;
+.h2 {
+	font-size: 2em;
+	font-weight: bold;
+	margin: 10px auto;
 }
 
 
-h4 {
-	text-align: center;
+.h4 {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: 10px auto;
 }
 
 textarea {
-	width: 50%;
-	margin-left: 25%;
+	width: 90%;
+	font-size: 1.5em;
 }
-
+#addoption {
+	font-size: 1.5em;
+	width: 1.5em;
+	margin-left: 8px;
+}
 
 .optionField > input {
-	width: 50%;
-	margin-left: 25%;
+	font-size: 1.5em;
+	width: 90%;
 }
 
-.submitHolder {
-	text-align: center;
+#submitButton {
+	margin: 10px auto;
+	font-size: 1.5em;
+	padding:6px;
+	font-weight: bold;
 }
-
 
 .question {
 	width: 50%;
 	margin: 0 auto;
-	margin-top: 10px;
-	font-size: 14px;
+	margin-top: 14px;
+	font-size: 2em;
 	text-align: left;
 }
 
-.option {
-	font-size: 12px;
-	font-weight: normal;
+.subtext {
+	font-size:1.5em;
 	text-align: left;
 }
 
 .result_option {
 	background-color: #AAFFAA;
+	margin: 4px 0px;
+	-webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.6);// inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.6); //inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow:  1px 1px 1px 0px rgba(0, 0, 0, 0.6);
 	text-align: left;
+	font-size: 2em;
 	padding-left: 4px;
 	white-space: nowrap;
 }

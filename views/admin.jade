@@ -5,28 +5,30 @@ block head
 
 block content
   div(id="content_div")
-    h2 Add a question to the survey!
+    div(class="h2") Add a question to the survey!
     form(action="/questions/create", method="post")
-      h4 Question:
+      div(class="h4") Question
       textarea(name="question_text", rows=4, cols=50)
-      h4 Add multiple choice options:
+      div(class="h4") Add multiple choice options
       div(class="optionField")
         input(type="text", name="option_one", size=50)
-        button(id="addoption", form="", onclick="updateOptionFields()") +
+        button(id="addoption", type="button", onclick="updateOptionFields()") +
       div(class="submitHolder")
-        input(type="submit")
+        input(type="submit", id="submitButton")
     script(type="text/javascript", src="/javascripts/options.js")
 
-    h2 Results
+    div(class="h2") &nbsp
+    div(class="h2") Results
     div
       each result in Object.keys(results)
         p
-          span
+          span(class="question")
             =results[result].questionString
-            &nbsp
-            |(Total Number of responses:
+          div(class="subtext")
+            |(
             =results[result].total
-            |)
+            |&nbspresponses)
+
 
         if results[result].options
           each opt in results[result].options
