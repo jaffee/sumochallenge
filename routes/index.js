@@ -15,11 +15,11 @@ function getRandomInt(min, max) {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	if (!("seenQuestions" in  res.cookie)) {
-		res.cookie.seenQuestions = [];
-		res.cookie.maxAge = 1000000;
+	var sess = req.session;
+	if (!sess.seenQuestions) {
+		sess.seenQuestions = [];
 	}
-	var seenQuestions = res.cookie["seenQuestions"];
+	var seenQuestions = sess.seenQuestions;
 
 	// find all questions that are not in seenQuestions
 	models.Question.findAll({
@@ -32,7 +32,7 @@ router.get('/', function(req, res) {
 		if(questions.length != 0){
 			// pick one at random
 			var question = questions[getRandomInt(0, questions.length)];
-			res.cookie.seenQuestions.push(question.id);
+			sess.seenQuestions.push(question.id);
 			res.render('index', {
 				title: 'Sumo Challenge',
 				question: question
@@ -123,6 +123,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     res.redirect('/login');
+	return null;
 };
 
 module.exports = router;
